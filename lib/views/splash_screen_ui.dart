@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, annotate_overrides
+
 import 'package:flutter/material.dart';
 import 'package:flutter_task_v1_app/views/show_all_task_ui.dart';
 

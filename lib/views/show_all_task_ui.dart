@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_task_v1_app/models/task.dart';
 import 'package:flutter_task_v1_app/services/supabase_service.dart';
 import 'package:flutter_task_v1_app/views/add_task_ui.dart';
+import 'package:flutter_task_v1_app/views/update_delete_task_ui.dart';
 
 class ShowAllTaskUi extends StatefulWidget {
   const ShowAllTaskUi({super.key});
@@ -55,7 +56,9 @@ class _ShowAllTaskUiState extends State<ShowAllTaskUi> {
               MaterialPageRoute(
                 builder: (context) => AddTaskUi(),
               ),
-            );
+            ).then((value){
+              loadTasks();
+            });
           },
           child: Icon(
             Icons.add,
@@ -92,7 +95,18 @@ class _ShowAllTaskUiState extends State<ShowAllTaskUi> {
                           right: 35,
                         ),
                         child: ListTile(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => UpdateDeleteTaskUi(
+                                  task: tasks[index],
+                                ),
+                              ),
+                            ).then((value){
+                              loadTasks();
+                            });
+                          },
                           leading: (tasks[index].task_image_url != null &&
                                   tasks[index].task_image_url != "")
                               ? Image.network(
